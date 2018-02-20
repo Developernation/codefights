@@ -19,7 +19,7 @@ except ImportError:
 SCOPES = ['https://www.googleapis.com/auth/drive',
          'https://www.googleapis.com/auth/spreadsheets']
 
-CLIENT_SECRET_FILE = 'My Project-6137ee41dc4f.json'
+CLIENT_SECRET_FILE = '<secrects_file_here>.json'
 APPLICATION_NAME = 'Google Sheets API Python Quickstart'
 
 
