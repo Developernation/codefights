@@ -11,7 +11,7 @@ import time,csv
 import os
 
 class Send_Txt:
-    def __init__ (self, atkn:'account token as a str', toCell:'cell number as a str', accSID='AC8b41a619694b06188d00931d980cb903', twlNum='+17069931459'):
+    def __init__ (self, atkn:'account token as a str', toCell:'cell number as a str', accSID, twlNum):
         self.atkn = atkn
         self.accSID = accSID
         self.twlNum = twlNum
