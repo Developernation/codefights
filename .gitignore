@@ -5,9 +5,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+PyGameLrn/PG_env/*
+GSheet2Text/GoogleDrive_venv
+GSheet2Text/Test.csv
+requirements.txt
 # C extensions
 *.so
+*.bat
+*.json
 
 # Distribution / packaging
 .Python
