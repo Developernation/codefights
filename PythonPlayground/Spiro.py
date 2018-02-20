@@ -1,6 +1,6 @@
-    #! python3
+#! python3
 
-    import math,PIL,turtle
+import math,PIL,turtle
 
 class Spiro:
 '''draws a single curve using draw() and animates a set of random
