@@ -2,6 +2,7 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
+FileCreator.*
 __pycache__/
 *.py[cod]
 *$py.class
