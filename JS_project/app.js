@@ -9,6 +9,29 @@ GAME RULES:
 
 */
 
+
+//console.log(dice);
+
+//---------Settter---------------
+//change contents of a element attribute. textContent can only set plain text
+//document.querySelector('#current-' + activePlayer).textContent = dice //allows you to select a HTML element for manipulation just like you do in CSS
+
+//If we wan to edit the HTML we need to use the innerHTML method instead of textContent...
+//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';//this makes the number have italics
+//--------End Setter-------------
+
+
+
+
+
+//----------Getter---------------
+//we can also store info for reading later (this reads the score for player 1 from the element #score-0 in the html)
+//var x = document.querySelector('#score-' + activePlayer).textContent; //this will read the content of the element with that id and store it in the variable
+//----------End Getter-----------
+//console.log(x);
+
+//------------------------------------------MAIN PROGRAM----------------------------------------------------------
+//----------------------------------------------------------------------
 var scores, roundScores, activePlayer;
 
 //index 0 is player 1, index 1 is player 2
@@ -74,11 +97,20 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
 });
 document.querySelector('.btn-hold').addEventListener('click',function(){
    //1)add current score to global scoe
+
     scores[activePlayer] += roundScore;
+    if (scores[activePlayer] >= 30){
+        console.log('WINNER');
+        document.querySelector('#name-'+activePlayer).textContent = 'WINNER!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
+        document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+    }else {
+    console.log(scores[activePlayer])
     roundScore = 0;
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
     switch_player();
-
+    }
     //2) Update user interface
     //3) Check if player won game
 
