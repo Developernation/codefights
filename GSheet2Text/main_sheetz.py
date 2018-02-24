@@ -1,5 +1,8 @@
 import getDriveData
 import send_txt
+'''This program sends a text notification of how many registrations
+are in this spreadsheet associated with a google form. Modification may be
+necessary depending on the layout of your google spreadsheet'''
 #------send_txt variables--------
 tkn = '<add twilio_token_here>'
 phone_number = '<add phone number here>'
