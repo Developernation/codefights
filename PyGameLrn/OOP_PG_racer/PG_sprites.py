@@ -4,7 +4,7 @@ import os
 #http://thepythongamebook.com/en:pygame:step002
 class PG_sprites:
     def __init__(self,\
-                fldr_path):
+                fldr_path='../'):
         self.spaceShip = pg.image.load(os.path.join(fldr_path,'tiny_spaceShip.png')) #SPRITE
         self.rockImage = pg.image.load(os.path.join(fldr_path,'tiny_astroid.png'))
         self.bulletPic = pg.image.load(os.path.join(fldr_path,'space_bullet.png'))

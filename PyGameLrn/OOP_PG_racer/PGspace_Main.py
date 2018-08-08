@@ -125,8 +125,8 @@ def game_loop(disp_w=800,disp_h=600,ast_x=random.randrange(50,750) \
                 #-----------------------------------------------------------------------
 
         if ast_y > disp_h:#moves the rock to the top of the screen if it is at the bottom
-            ast_y = 0 - rockImage_h
-            ob_x_start = random.randrange(0,display_width-rockImage_w)
+            ast_y = 0 - astImage_h
+            ob_x_start = random.randrange(0,display_width-astImage_w)
 
         pg.display.update() #flips the screen
         clock.tick(60) #sets frames per second

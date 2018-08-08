@@ -1,5 +1,6 @@
 #! python3
-
+#handle the pulsaudio error in linux
+#https://bbs.archlinux.org/viewtopic.php?id=185736
 import pygame,math
 pygame.init()
 

@@ -13,6 +13,9 @@
 #the book
 #http://thepythongamebook.com/en:pygame:step001
 
+#bulletts
+#https://stackoverflow.com/questions/21567250/how-to-create-bullets-in-pygame
+
 import pygame as pg
 import time
 import random
@@ -23,6 +26,8 @@ pg.init() #initalize game
 pg.mixer.init() #initialize game music
 
 pg.mixer.music.load('moment_of_truth.mp3')
+shot = pg.mixer.Sound('lsr.wav')
+boom = pg.mixer.Sound('bomb.wav')
 
 pg.mixer.music.play(-1)
 # Define some colors
@@ -46,20 +51,26 @@ pg.display.set_caption('DataType Racer')
 
 carImg = pg.image.load('tiny_spaceShip.png') #SPRITE
 rockImage = pg.image.load('tiny_astroid.png')
-#bullet_pic = pg.image.load('space_bullet.png')
+bullet_pic = pg.image.load('space_bullet_11x20.png').convert_alpha()
+explode_pic = pg.image.load('explosion60x50.png')
+
+
 
 rockImage = pg.transform.rotate(rockImage,20)
 rockImage_w = 50
 rockImage_h = 94
 carImg_width = 40 #pixels
 carImg_height = 40 #pixels
-
+bullet_pic_w = 11
+bullet_pic_h = 20
 
 clock = pg.time.Clock() #frames per second constructor
 
-
 def rock_blit(rock_x,rock_y):
     gameDisplay.blit(rockImage,(rock_x,rock_y))
+
+def space_bullet_blit(space_bullet_x,space_bullet_y):
+    gameDisplay.blit(bullet_pic,(space_bullet_x+19,space_bullet_y-4))
 
 def car(x,y):
     '''Sets the location of the carImg.
@@ -94,6 +105,7 @@ def dodgyThings(thing_x,thing_y,thing_width,thing_height):
 #-------------------------------------------------------------------------------
 
 def game_loop(): #this is how we control our game
+    bullets = []
     #----background -----------
     gameDisplay.blit(bg,bkg_rect)
     pg.display.update()
@@ -106,6 +118,7 @@ def game_loop(): #this is how we control our game
     #---------car location start
     car_x = (display_width * 0.45)
     car_y = (display_height * .5)
+
     #change location of car
     x_change = 0
     y_change = 0
@@ -130,6 +143,10 @@ def game_loop(): #this is how we control our game
                     print('q')
                     gameExit = True
 
+                if event.key == pg.K_s:
+                    shot.play()
+                    bullets.append([(car_x+19),car_y])
+
                 if event.key == pg.K_LEFT:
                     x_change = -5
                 elif event.key == pg.K_RIGHT:
@@ -145,6 +162,12 @@ def game_loop(): #this is how we control our game
                     x_change = 0
                 if event.key == pg.K_UP or event.key == pg.K_DOWN:
                     y_change = 0
+
+        mx, my = pg.mouse.get_pos()
+
+
+        #screen.blit(background, (0, 0))
+
         #---------end event handling------
         car_x+= x_change #this will set the actual location of the car
         car_y+= y_change
@@ -160,16 +183,37 @@ def game_loop(): #this is how we control our game
         gameDisplay.blit(bg,(0,y))
         gameDisplay.blit(bg,(0,y1))
 
+
+
         if y > display_height:
             y = -display_height
         if y1 > display_height:
             y1 = -display_height
         #----------------------------------------
+        for b in range(len(bullets)):
+            bullets[b][1] -= 10
+
+        # Iterate over a slice copy if you want to mutate a list.
+        for bullet in bullets[:]:
+            if bullet[0] < 0:
+                bullets.remove(bullet)
+
+
+        for bullet in bullets:
+            gameDisplay.blit(bullet_pic, pg.Rect(bullet[0], bullet[1], 0, 0))
+            if ob_x_start<= bullet[0] <= ob_x_start + rockImage_w and ob_y_start <= bullet[1] <= ob_y_start + (rockImage_h-10):#collision handling
+                    gameDisplay.blit(explode_pic,(ob_x_start,ob_y_start))
+                    pg.display.update()
+                    time.sleep(.01)
+                    ob_y_start = 0 - rockImage_h
+
+                    ob_x_start = random.randrange(0,display_width-rockImage_w)
+                    boom.play()
 
         rock_blit(ob_x_start,ob_y_start)
 
 
-
+        space_bullet_blit(car_x,car_y)
         car(car_x,car_y)#call function and display car
 
         #game_logic
@@ -199,7 +243,7 @@ def game_loop(): #this is how we control our game
             ob_x_start = random.randrange(0,display_width-rockImage_w)
 
         pg.display.update() #flips the screen
-        clock.tick(60) #sets frames per second
+        clock.tick(80) #sets frames per second
 
 
 

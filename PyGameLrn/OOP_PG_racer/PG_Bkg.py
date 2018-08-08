@@ -12,9 +12,9 @@ class PG_Bkg:
         'BLUE':(   0,   0, 255)
         }
 
-    def __init__(self,dsp_w=800,dsp_h=600,\
+    def __init__(self,fldr_path='../',dsp_w=800,dsp_h=600,\
                 dsp_img='stars2.png',
-                fldr_path):
+                ):
         self.dspW = dsp_w
         self.dspH = dsp_h
         self.dspImg = dsp_img

@@ -3,7 +3,7 @@ import pygame as pg
 import os
 
 class PG_music:
-    def __init__(self,fldr_path):
+    def __init__(self,fldr_path='../'):
         pg.mixer.pre_init(44100, -16, 2, 2048) # setup mixer to avoid sound lag
         self.fldr_path = fldr_path
     #make sure you initialize both pygame
